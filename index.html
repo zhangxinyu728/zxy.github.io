@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .imgCards{
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+        }
+        .imgCards{
+            position: absolute;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.5s ease-in-out;
+        }
+        .imgCards img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="imgCards">
+        <div onclick="switchCard()" class="imgCards"><img src="1.jfif" alt=""></div>
+        <div onclick="switchCard()" class="imgCards"><img src="2.jpeg" alt=""></div>
+        <div onclick="switchCard()" class="imgCards"><img src="3.jpg" alt=""></div>
+        <div onclick="switchCard()" class="imgCards"><img src="4.jpg" alt=""></div>
+        <div onclick="switchCard()" class="imgCards"><img src="5.jpeg" alt=""></div>
+    </div>
+</body>
+<script>
+    let styleValue=[
+        {
+            left:'10%',
+            height:'30vh',
+            width:'25vw',
+            zIndex:'1',
+        },
+        {
+            left:'20%',
+            height:'40vh',
+            width:'30vw',
+            zIndex:'2',
+        }, 
+        {
+            left:'50%',
+            transform:'translateX(-50%)',
+            height:'50vh',
+            width:'40vw',
+            zIndex:'3',
+        },
+        {
+            left:'50%',
+            height:'40vh',
+            width:'30vw',
+            zIndex:'2',
+        },
+        {
+            left:'70%',
+            height:'30vh',
+            width:'25vw',
+            zIndex:'1',
+        },
+    ]
+    let imgCards = document.getElementsByClassName("imgCards")
+    let num=0;
+    let time=false;
+    function switchCard(){
+        if(time) return;
+        time=true;
+        for(let i=0;i<imgCards.length;i++){
+            let styleI=(i+num)%imgCards.length;
+            imgCards[i].style={}
+            for(let key in styleValue[styleI]){
+                imgCards[i].style[key]=styleValue[styleI][key]
+            }
+
+        }
+        num=num+1;
+        setTimeout(()=>{
+            time=false
+        },500)
+    }
+    switchCard()
+</script>
+</html>
